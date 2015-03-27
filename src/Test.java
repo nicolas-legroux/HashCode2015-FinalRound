@@ -8,8 +8,7 @@ public class Test {
 		pb.print();
 		
 		Solution solution = new Solution();
-		solution.save("output.txt");
-		
+		solution.save("output.txt");		
 	}
 
 }
