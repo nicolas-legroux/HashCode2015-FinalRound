@@ -8,14 +8,12 @@ public class Test {
 		try {
 			Problem pb = new Problem("data/final_round.in");
 			
-
-			pb.printCibles();
+			//pb.printCibles();
 			
 			//Solver solver = new Solver(pb);
+			//pb.print();
 
-			pb.print();
-
-			BadSolver solver = new BadSolver(pb);
+			DijkstraSolver solver = new DijkstraSolver(pb);
 			//Solver solver = new Solver(pb);
 			
 			Solution solution = solver.solve();

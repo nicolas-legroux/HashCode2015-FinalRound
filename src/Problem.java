@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 
 public class Problem {
 	
@@ -19,7 +20,11 @@ public class Problem {
 	boolean[][] cibles; // (colonne, ligne)
 	Vent[][][] vents; // (colonne, ligne, altitude)
 	
+	HashSet<Position3D> setCibles;
+	
 	Problem(String filename) throws IOException{
+		setCibles = new HashSet<Position3D>();
+		
 		load(filename);
 	}
 	
@@ -61,6 +66,10 @@ public class Problem {
 			int y = Integer.parseInt(parsedline[0]);
 			int x = Integer.parseInt(parsedline[1]);
 			cibles[x][y] = true;
+			
+			for (int a = 1 ; a < nbAltitudes ; ++a) {
+				setCibles.add(new Position3D(x, y, a));
+			}
 		}
 		
 		for (int a = 1; a < nbAltitudes; ++a){
