@@ -27,4 +27,12 @@ public class Node {
 		return score;
 	}
 	
+	public void setScoreNul() {
+		score = 0;
+	}
+	
+	public void setRealScore() {
+		score = bruteScore;
+	}
+	
 }

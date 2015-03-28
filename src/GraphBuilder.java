@@ -12,7 +12,7 @@ public class GraphBuilder {
 		nodes = new HashMap<Position3D, Node>(); //TODO IMPORTANT HASHCODE 3D WORKING
 	}
 	
-	public void build() {
+	public Graph build() {
 		
 		//Creating the nodes
 		Position3D pos;
@@ -25,12 +25,18 @@ public class GraphBuilder {
 				}
 			}
 		}
+		Node startingpoint = nodes.get(new Position3D(pb.depart.x, pb.depart.y, 0));
+		
+		Graph graph = new Graph(nodes, startingpoint);
+		
 		
 		Node nodehere;
 		Node nodetherebehind;
 		Node nodetheresame;
 		Node nodethereabove;
 		
+		
+		//now adding the edges
 		for(int x = 0; x < pb.nbColonnes; x++) {
 			for(int y = 0; y < pb.nbLignes; y++) {
 				for(int z = 0; z < pb.nbAltitudes; z++){
@@ -38,23 +44,29 @@ public class GraphBuilder {
 					
 					int newx = (x+pb.vents[x][y][z].ventx)%pb.nbColonnes;
 					int newy = y+pb.vents[x][y][z].venty;
-					if(newy >= 0 && newy < pb.nbLignes) 
+					
+					if(newy < 0 || newy >= pb.nbLignes) 
+						continue;
 					
 					if(z-1 >= 0) {
 						nodetherebehind = nodes.get(new Position3D(newx,newy,z-1));
+						nodehere.addNeighbor(nodetherebehind);
 					}
 					
 					nodetheresame = nodes.get(new Position3D(newx,newy,z));
+					nodehere.addNeighbor(nodetheresame);
 					
 					if(z+1 < pb.nbAltitudes) {
 						nodethereabove = nodes.get(new Position3D(newx,newy,z+1));
+						nodehere.addNeighbor(nodethereabove);
 					}
 			
 				}
 			}
 		}
+
 		
-		Vent[][][] vents; // (colonne, ligne, altitude)
+		return graph;
 	}
 	
 	private int computeScoreForPosition(int x, int y) {
