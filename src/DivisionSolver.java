@@ -19,6 +19,7 @@ public class DivisionSolver {
 		this.problem = problem;
 		GraphBuilder gb = new GraphBuilder(problem);
 		graph = gb.build();
+		//graph.print();
 		ygoal = new Position2D[problem.nbColonnes][NPARALLELBALON];
 		computeGoals();
 		System.out.println("Goals built");
@@ -35,7 +36,9 @@ public class DivisionSolver {
 				for(int y=0; y < problem.nbLignes; y++) {
 					realx = (lookingx + problem.nbColonnes)%problem.nbColonnes;
 					Node n = graph.getNode(new Position3D(realx, y, 1));
-					if(n.getScore() > 0) {
+					if(n == null)
+						continue;
+					if(n.getScore() >= 30) {
 						found = true;
 						if(y <= ymin)
 							ymin = y;
@@ -49,11 +52,11 @@ public class DivisionSolver {
 				}
 			}
 			
-			System.out.println("For x = " + x + " max y = " + ymax);
-			int delta = (ymax - ymin) / NPARALLELBALON;
+			System.out.println("For x = " + x + " min y = " + ymin + " and max y = " + ymax);
+			int delta = (ymax - ymin) / (NPARALLELBALON + 1); //TODO AMELIORER CIBLE
 			
 			for(int b = 0; b < NPARALLELBALON; b++)
-				ygoal[x][b] = new Position2D(realx, ymin + b * delta);
+				ygoal[x][b] = new Position2D(realx, ymin + (b+1) * delta);
 			
 		}
 	}
@@ -79,7 +82,7 @@ public class DivisionSolver {
 			
 			while(tour < problem.nbTours) {
 				
-				while(isalve * SALVEEVERY <= tour) {
+				while(isalve * SALVEEVERY >= tour) {
 					listpos.add(new Position3D(problem.depart, 0));
 					tour++;
 				}
