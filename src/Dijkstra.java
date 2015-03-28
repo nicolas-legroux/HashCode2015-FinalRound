@@ -87,7 +87,7 @@ public class Dijkstra {
 			System.out.println("score = " + myScore);
 			//*/
 			
-			if (dst.contains(node.position)) {
+			if (dst.contains(node.position) && myScore > 0) {
 				first = node.position;
 				/*
 				node.print();

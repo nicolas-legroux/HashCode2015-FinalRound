@@ -48,7 +48,7 @@ public class DijkstraSolver {
 		for (int tour = 0 ; tour < problem.nbTours ; ++tour) {
 			Configuration config = new Configuration(problem.nbBallons);
 			
-			System.out.println("Tour = " + tour);
+			System.out.println("Tour = " + tour + " ; cibles = " + cibles.size());
 			
 			for (int i = 0 ; i < problem.nbBallons ; ++i) {
 				Position3D lastPos = last.posBallons[i];
@@ -56,13 +56,22 @@ public class DijkstraSolver {
 				
 				if (myPath != null && myPath.isEmpty()) {
 					cibles.add(lastPos);
+					/*
+					System.out.println("Add :");
+					graph.getNode(lastPos).print();
+					//*/
 					myPath = null;
 				}
 				
 				if (myPath == null) {
 					Path path = dijkstra.findFirst(graph.getNode(lastPos), cibles);
 					cibles.remove(path.getLast());
+					/*
+					System.out.println("Remove :");
+					graph.getNode(path.getLast()).print();
+					//*/
 					path.pollFirst();
+					targets[i] = path;
 					myPath = path;
 				}
 				
