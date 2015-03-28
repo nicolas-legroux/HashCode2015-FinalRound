@@ -20,9 +20,6 @@ public class Problem {
 	Vent[][][] vents; // (colonne, ligne, altitude)
 	
 	Problem(String filename) throws IOException{
-		
-		//TODO ici : initialiser les variables globales		
-		
 		load(filename);
 	}
 	
@@ -53,19 +50,31 @@ public class Problem {
 		
 		//TODO : read each line, change NUMBER_OF_LINES
 		//int NUMBER_OF_Targets = 0;
+		// Initialisation of the cibles array
+		cibles=new boolean[nbLignes][nbColonnes];
+		for (int i=0; i < nbLignes; i++){
+			for (int j=0; j < nbColonnes; j++){
+				cibles[i][j]=false;
+			}
+		}
 		
 		for (int i=0; i < nbCibles; i++){
 			String line = br.readLine();
 			String[] parsedline= line.split(" ");
-			cibles[Integer.parseInt(parsedline[0])][Integer.parseInt(parsedline[1])]=true;
+			int y = Integer.parseInt(parsedline[0]);
+			int x = Integer.parseInt(parsedline[1]);
+			cibles[x][y]=true;
 		}
+		
+		// Initialisation of the  array "vents"
+		vents=new Vent[nbLignes][nbColonnes][nbAltitudes];
 		
 		for (int i=0; i < nbAltitudes; i++){
 			for (int j=0; j < nbLignes; j++){
 				String line = br.readLine();
 				String[] parsedline= line.split(" ");
 				for (int t = 0 ; t < parsedline.length ; t += 2) {
-					vents[i][j][t]=new Vent(Integer.parseInt(parsedline[t]),Integer.parseInt(parsedline[t+1]));
+					vents[j][t/2][i]=new Vent(Integer.parseInt(parsedline[t]),Integer.parseInt(parsedline[t+1]));
 				}
 			}
 			
@@ -79,6 +88,13 @@ public class Problem {
 	public void print() {
 		//TODO : make sure that the input data has been read correctly
 		System.out.println("Print problem : not implemented");
+		
+		for (int y = 0 ; y < nbLignes ; ++y) {
+			for (int x = 0 ; x < nbColonnes ; ++x) {
+				System.out.print(cibles[x][y] ? "*" : ".");
+			}
+			System.out.print("\n");
+		}
 	}
 
 }

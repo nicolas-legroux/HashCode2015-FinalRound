@@ -18,6 +18,28 @@ public class Solution {
 	public void print() {
 		//TODO : print other useful info about solution (number of elements, etc...)
 		System.out.println("Print solution : not implemented");
+		for (int tour = 0 ; tour < problem.nbTours ; ++tour) {
+			System.out.println("tour[" + tour + "]");
+			
+			Configuration config = configurations[tour];
+			for (int y = 0 ; y < problem.nbLignes ; ++y) {
+				for (int x = 0 ; x < problem.nbColonnes ; ++x) {
+					
+					boolean covered = false;
+					for (int ballon = 0 ; ballon < problem.nbBallons ; ++ballon) {
+						if (config.posBallons[ballon].isSame(x, y)) {
+							covered = true;
+							break;
+						}
+					}
+					
+					System.out.print(covered ? "+" : (problem.cibles[x][y] ? "*" : "."));
+				}
+				System.out.print("\n");
+			}
+			
+			System.out.println();
+		}
 	}
 
 	void save(String filename) throws IOException {
