@@ -9,9 +9,9 @@ public class Test {
 			Problem pb = new Problem("data/final_round.in");
 			
 			pb.print();
-			
-			//Solver solver = new Solver(pb);
-			BadSolver solver = new BadSolver(pb);
+
+			//BadSolver solver = new BadSolver(pb);
+			Solver solver = new Solver(pb);
 			
 			Solution solution = solver.solve();
 			//solution.print();

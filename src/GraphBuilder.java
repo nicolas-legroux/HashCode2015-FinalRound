@@ -30,18 +30,28 @@ public class GraphBuilder {
 		
 		Graph graph = new Graph(nodes, startingpoint);
 		
-		
+		/*
 		Node nodehere;
 		Node nodethere;
 
-		
+		//*/
 		
 		//now adding the edges
 		for(int x = 0; x < pb.nbColonnes; x++) {
 			for(int y = 0; y < pb.nbLignes; y++) {
 				for(int z = 0; z < pb.nbAltitudes; z++){
-					nodehere = nodes.get(new Position3D(x,y,z));
+					Node src = nodes.get(new Position3D(x,y,z));
 					
+					for (int newz = z-1 ; z <= z+1 ; z++) {
+						if (newz <= 0 || newz >= pb.nbAltitudes) 
+							continue;
+						Position3D newpos = src.position.move(newz, pb.vents[x][y][newz], pb.nbLignes, pb.nbColonnes);
+						if (newpos != null) {
+							System.out.println("Add neighbor");
+							src.addNeighbor(nodes.get(newpos));
+						}
+					}
+					/*
 					for(int newz = z-1; z <= z+1; z++) {
 						if(newz < 0 || newz >= pb.nbAltitudes) 
 							continue;
@@ -55,8 +65,7 @@ public class GraphBuilder {
 						nodethere = nodes.get(new Position3D(newx,newy,newz));
 						nodehere.addNeighbor(nodethere);
 					}
-					
-			
+					//*/
 				}
 			}
 		}
