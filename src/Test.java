@@ -8,10 +8,16 @@ public class Test {
 		try {
 			Problem pb = new Problem("data/final_round.in");
 			
+<<<<<<< HEAD
 			pb.printCibles();
 			
 			//Solver solver = new Solver(pb);
+=======
+			pb.print();
+
+>>>>>>> 5ce924d642527df1ff87960596244bca84d3ae67
 			BadSolver solver = new BadSolver(pb);
+			//Solver solver = new Solver(pb);
 			
 			Solution solution = solver.solve();
 			//solution.print();

@@ -31,7 +31,7 @@ public class Problem {
 		String[] globalConstants = firstLine.split(" ");
 		nbLignes=Integer.parseInt(globalConstants[0]);
 		nbColonnes=Integer.parseInt(globalConstants[1]);
-		nbAltitudes=Integer.parseInt(globalConstants[2]);
+		nbAltitudes=Integer.parseInt(globalConstants[2]) + 1;
 
 		cibles = new boolean[nbColonnes][nbLignes];
 		for (int x = 0 ; x < nbColonnes ; ++x) {
@@ -63,7 +63,7 @@ public class Problem {
 			cibles[x][y] = true;
 		}
 		
-		for (int a = 0; a < nbAltitudes; ++a){
+		for (int a = 1; a < nbAltitudes; ++a){
 			for (int y = 0; y < nbLignes; ++y){
 				String line = br.readLine();
 				String[] parsedline = line.split(" ");
@@ -89,9 +89,7 @@ public class Problem {
 		}
 		System.out.println();
 		
-		
-		
-		for (int a = 0; a < nbAltitudes; ++a) {
+		for (int a = 1; a < nbAltitudes; ++a) {
 			for (int y = 0 ; y < nbLignes ; ++y) {
 				for (int x = 0 ; x < nbColonnes ; ++x) {
 					System.out.print(vents[x][y][a].symbol());

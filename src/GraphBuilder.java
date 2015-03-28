@@ -1,5 +1,7 @@
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Map.Entry;
 
 
 public class GraphBuilder {
@@ -15,12 +17,10 @@ public class GraphBuilder {
 	public Graph build() {
 		
 		//Creating the nodes
-		Position3D pos;
-		
 		for(int x = 0; x < pb.nbColonnes; x++) {
 			for(int y = 0; y < pb.nbLignes; y++) {
 				for(int z = 0; z < pb.nbAltitudes; z++){
-					pos = new Position3D(x,y,z);			
+					Position3D pos = new Position3D(x,y,z);			
 					nodes.put(pos, new Node(pos, computeScoreForPosition(x,y)));
 					
 				}
@@ -30,37 +30,47 @@ public class GraphBuilder {
 		
 		Graph graph = new Graph(nodes, startingpoint);
 		
-		
-		Node nodehere;
-		Node nodethere;
-
-		
-		
 		//now adding the edges
 		for(int x = 0; x < pb.nbColonnes; x++) {
 			for(int y = 0; y < pb.nbLignes; y++) {
 				for(int z = 0; z < pb.nbAltitudes; z++){
-					nodehere = nodes.get(new Position3D(x,y,z));
+					Node src = nodes.get(new Position3D(x,y,z));
 					
-					for(int newz = z-1; newz <= z+1; newz++) {
-						if(newz < 0 || newz >= pb.nbAltitudes) 
+					for (int newz = z-1 ; newz <= z+1 ; ++newz) {
+						if (newz <= 0 || newz >= pb.nbAltitudes) 
 							continue;
 						
-						int newx = (x+pb.vents[x][y][newz].ventx + pb.nbColonnes)%pb.nbColonnes;
-						int newy = y+pb.vents[x][y][newz].venty;
-						
-						if(newy < 0 || newy >= pb.nbLignes) 
-							continue;
-						
-						nodethere = nodes.get(new Position3D(newx,newy,newz));
-						nodehere.addNeighbor(nodethere);
+						Position3D newpos = src.position.move(newz, pb.vents[x][y][newz], pb.nbLignes, pb.nbColonnes);
+						if (newpos != null)
+							src.addNeighbor(nodes.get(newpos));
 					}
-					
-			
 				}
 			}
 		}
+		
+		boolean modif = true;
+		while (modif) {
+			System.out.println("New step :");
+			modif = false;
+			
+			LinkedList<Position3D> toremove = new LinkedList<Position3D>();
+			
+			for (Entry<Position3D, Node> entry : graph.map.entrySet()) {
+				Node node = entry.getValue();
+				if (node.getNeighbors().isEmpty()) {
+					System.out.println("Erase node :");
+					node.print();
+					for (Node pred : node.getPredecessors()) {
+						pred.removeNeighbor(node);
+					}
+					toremove.add(entry.getKey());
+					modif = true;
+				}
+			}
 
+			for (Position3D pos : toremove)
+				graph.map.remove(pos);
+		}
 		
 		return graph;
 	}
