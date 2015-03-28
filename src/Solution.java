@@ -7,6 +7,7 @@ public class Solution {
 
 	Problem problem;
 	// TODO définir variables décrivant la solution
+	Configuration[] configurations;
 
 	Solution(Problem problem) {
 		this.problem = problem;
@@ -27,7 +28,14 @@ public class Solution {
 		BufferedWriter bw = new BufferedWriter(fw);
 		
 		// TODO : write solution
-		bw.write("Write the solution");
+		for (int tour = 0 ; tour < problem.nbTours ; ++tour) {
+			for (int j = 0 ; j < problem.nbBallons ; ++j) {
+				if (j > 0)
+					bw.write(" ");
+				bw.write(String.valueOf(configurations[tour].posBallons[j]));
+			}
+			bw.write("\n");
+		}
 		
 		bw.close();
 		System.out.println("Done writing the solution");

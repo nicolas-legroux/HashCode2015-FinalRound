@@ -5,6 +5,16 @@ import java.io.IOException;
 public class Problem {
 	
 	//TODO ici : définir les variables globales du probleme
+	int nbLignes;
+	int nbColonnes;
+	int nbAltitudes;
+	
+	int nbCibles;
+	int rayon;
+	int nbBallons;
+	int nbTours;
+	boolean[][] cibles; // (colonne, ligne)
+	Vent[][][] vents; // (colonne, ligne, altitude)
 	
 	Problem(String filename) throws IOException{
 		
