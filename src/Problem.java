@@ -10,6 +10,11 @@ public class Problem {
 	int nbAltitudes;
 	
 	int nbCibles;
+	int rayon;
+	int nbBallons;
+	int nbTours;
+	
+	int x_de
 	boolean[][] cibles; // (colonne, ligne)
 	Vent[][][] vents; // (colonne, ligne, altitude)
 	
@@ -26,6 +31,17 @@ public class Problem {
 		
 		String firstLine = br.readLine();
 		String[] globalConstants = firstLine.split(" ");
+		nbLignes=Integer.parseInt(globalConstants[0]);
+		nbColonnes=Integer.parseInt(globalConstants[1]);
+		nbAltitudes=Integer.parseInt(globalConstants[2]);
+		
+		String secondLine = br.readLine();
+		globalConstants = secondLine.split(" ");
+		nbCibles=Integer.parseInt(globalConstants[0]);
+		rayon=Integer.parseInt(globalConstants[1]);
+		nbBallons=Integer.parseInt(globalConstants[2]);
+		nbTours=Integer.parseInt(globalConstants[3]);
+		
 		
 		//TODO : process globalConstants
 		// constant = Integer.parseInt(globalConstants[i]);
