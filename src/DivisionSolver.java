@@ -11,9 +11,9 @@ public class DivisionSolver {
 	Graph graph;
 	Random generator;
 	
-	private final int NPARALLELBALON = 20;
+	private final int NPARALLELBALON = 6;
 	private final int LOOKINGFORWARD = 10;
-	private final int SALVEEVERY = 20;
+	private final int SALVEEVERY = 5;
 	
 	Position2D[][] ygoal;
 	
@@ -30,36 +30,29 @@ public class DivisionSolver {
 	
 	public void computeGoals() {
 		for(int x = 0; x < problem.nbColonnes; x++) {
-			int ymin = Integer.MAX_VALUE;
-			int ymax = 0;
-			int realx = 0;
+			int ymin = 0;
+			int ymax = 74;
 			
-			boolean found = false;
-			for(int lookingx = x + LOOKINGFORWARD; !found; lookingx++) {
-				for(int y=0; y < problem.nbLignes; y++) {
-					realx = (lookingx + problem.nbColonnes)%problem.nbColonnes;
-					Node n = graph.getNode(new Position3D(realx, y, 1));
-					if(n == null)
-						continue;
-					if(n.getScore() >= 10) {
-						found = true;
-						if(y <= ymin)
-							ymin = y;
-						
-						if(y >= ymax)
-							ymax = y;
-					}
-					
-					if(ymax <= 5)
-						found = false;
-				}
+			int realx = (x + LOOKINGFORWARD + problem.nbColonnes)%problem.nbColonnes;
+			
+			if(realx <= 120) {
+				ymin = 0;
+				ymax = 74;
+			} else {
+				ymin = 0;
+				ymax = 40;
 			}
 			
-			System.out.println("For x = " + x + " min y = " + ymin + " and max y = " + ymax);
-			int delta = (ymax - ymin) / (NPARALLELBALON + 1); //TODO AMELIORER CIBLE
 			
-			for(int b = 0; b < NPARALLELBALON; b++)
-				ygoal[x][b] = new Position2D(realx, ymin + (b+1) * delta);
+			System.out.println("For x = " + x + " min y = " + ymin + " and max y = " + ymax);
+			double delta = (double)(ymax - ymin) / (NPARALLELBALON + 1); //TODO AMELIORER CIBLE
+			
+			for(int b = 0; b < NPARALLELBALON; b++) {
+				int ny = (int)(ymin + (b+1) * delta);
+				ygoal[x][b] = new Position2D(realx, ny);
+				System.out.println("Ballon " + b + " at x " + x + " goes at y " + ny);
+			}
+			
 			
 		}
 	}
