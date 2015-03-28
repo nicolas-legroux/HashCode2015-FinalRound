@@ -23,4 +23,8 @@ public class Node {
 		return neighbors;
 	}
 	
+	public int getScore() {
+		return score;
+	}
+	
 }
