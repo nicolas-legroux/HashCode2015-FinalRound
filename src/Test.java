@@ -9,6 +9,10 @@ public class Test {
 
 			GraphBuilder gb = new GraphBuilder(pb);
 			Graph g = gb.build();	
+
+			//GraphBuilder gb = new GraphBuilder(pb);
+			//Graph g = gb.build();			
+
 			
 			System.out.println("Done building graph.");
 			
@@ -21,13 +25,14 @@ public class Test {
 			//Solver solver = new Solver(pb);
 			//pb.print();
 
-			DijkstraSolver solver = new DijkstraSolver(pb);
+			//DijkstraSolver solver = new DijkstraSolver(pb);
 			//BadSolver solver = new BadSolver(pb);
 			//Solver solver = new Solver(pb);
-			//DivisionSolver solver = new DivisionSolver(pb);
+			DivisionSolver solver = new DivisionSolver(pb);
+
 			
 			Solution solution = solver.solve();
-			solution.print();
+			//solution.print();
 			solution.save("data/output.txt");
 			*/
 			
