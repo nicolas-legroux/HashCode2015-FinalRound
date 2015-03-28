@@ -38,6 +38,9 @@ public class Dijkstra {
 		for (;;) {
 			path.addFirst(iter);
 			Position3D newiter = reverse.get(iter);
+			if(newiter == null) {
+				return null;
+			}
 			if (iter.equals(newiter))
 				break;
 			iter = newiter;
@@ -117,6 +120,9 @@ public class Dijkstra {
 		for (;;) {
 			path.addFirst(iter);
 			Position3D newiter = reverse.get(iter);
+			if(newiter == null)
+				return null;
+			
 			if (iter.equals(newiter))
 				break;
 			iter = newiter;

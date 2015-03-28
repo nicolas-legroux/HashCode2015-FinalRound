@@ -47,7 +47,7 @@ public class GraphBuilder {
 				}
 			}
 		}
-		
+		/*
 		boolean modif = true;
 		while (modif) {
 			//System.out.println("New step :");
@@ -67,11 +67,12 @@ public class GraphBuilder {
 					modif = true;
 				}
 			}
-
+			
 			for (Position3D pos : toremove)
 				graph.map.remove(pos);
+				
 		}
-		
+		*/
 		return graph;
 	}
 	
