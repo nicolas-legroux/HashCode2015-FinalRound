@@ -35,6 +35,9 @@ public class Problem {
 		nbLignes=Integer.parseInt(globalConstants[0]);
 		nbColonnes=Integer.parseInt(globalConstants[1]);
 		nbAltitudes=Integer.parseInt(globalConstants[2]);
+
+		cibles = new boolean[nbColonnes][nbLignes];
+		vents = new Vent[nbColonnes][nbLignes][nbAltitudes];
 		
 		String secondLine = br.readLine();
 		globalConstants = secondLine.split(" ");
