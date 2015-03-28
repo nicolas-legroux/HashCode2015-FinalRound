@@ -22,4 +22,10 @@ public class Graph {
 	public Node getNode(Position3D position) {
 		return map.get(position);
 	}
+	
+	public void print() {
+		for(Node node : map.values()) {
+			System.out.println("Node at " )
+		}
+	}
 }
