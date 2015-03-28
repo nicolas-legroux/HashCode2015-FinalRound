@@ -73,7 +73,7 @@ public class Dijkstra {
 		reverse.put(src.position, src.position);
 		score.put(src, 0);
 		
-		PriorityQueue<NodeAndScore> queue = new PriorityQueue<NodeAndScore>();
+		PriorityQueue<NodeAndScore> queue = new PriorityQueue<NodeAndScore>(1, new NodeAndScoreComparator());
 		queue.add(new NodeAndScore(src, 0));
 		
 		Position3D first = null;
@@ -82,13 +82,19 @@ public class Dijkstra {
 			Node node = elem.node;
 			int myScore = elem.score;
 			
+			if (myScore < 10) {
+				node.print();
+				System.out.println("score = " + myScore);
+			}
+			
+			if (dst.contains(node)) {
+				first = node.position;
+				node.print();
+				System.out.println("score = " + myScore);
+				break;
+			}
+			
 			if (myScore == score.get(node)) {
-				
-				if (dst.contains(node)) {
-					first = node.position;
-					break;
-				}
-				
 				for (Node next : node.getNeighbors()) {
 					Integer lastScore = score.get(next);
 					if (lastScore == null || myScore + 1 < lastScore) {
@@ -100,6 +106,9 @@ public class Dijkstra {
 			}
 		}
 
+		if (first == null)
+			return null;
+			
 		Path path = new Path();
 		
 		Position3D iter = first;

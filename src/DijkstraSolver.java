@@ -20,7 +20,8 @@ public class DijkstraSolver {
 		
 		Dijkstra dijkstra = new Dijkstra();
 		Path path = dijkstra.findFirst(graph.startingpoint, problem.setCibles);
-		path.print();
+		if (path != null)
+			path.print();
 		
 		// TODO : solve problem
 		Configuration start = new Configuration(problem.nbBallons);

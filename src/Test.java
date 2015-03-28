@@ -24,7 +24,7 @@ public class Test {
 			//DivisionSolver solver = new DivisionSolver(pb);
 			
 			Solution solution = solver.solve();
-			solution.print();
+			//solution.print();
 			solution.save("data/output.txt");
 			
 		} catch (IOException e) {
