@@ -1,4 +1,3 @@
-
 public class Position3D {
 	
 	Position2D pos;
