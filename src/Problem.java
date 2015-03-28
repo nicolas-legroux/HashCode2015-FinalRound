@@ -34,6 +34,12 @@ public class Problem {
 		nbAltitudes=Integer.parseInt(globalConstants[2]);
 
 		cibles = new boolean[nbColonnes][nbLignes];
+		for (int x = 0 ; x < nbColonnes ; ++x) {
+			for (int y = 0 ; y < nbLignes ; ++y) {
+				cibles[x][y] = false;
+			}
+		}
+		
 		vents = new Vent[nbColonnes][nbLignes][nbAltitudes];
 		
 		String secondLine = br.readLine();
@@ -45,43 +51,30 @@ public class Problem {
 		
 		String thirdLine = br.readLine();
 		String[] pos = thirdLine.split(" ");
-		depart=new Position2D(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]));
+		int ydepart = Integer.parseInt(pos[0]);
+		int xdepart = Integer.parseInt(pos[1]);
+		depart = new Position2D(xdepart, ydepart);
 		
-		
-		//TODO : read each line, change NUMBER_OF_LINES
-		//int NUMBER_OF_Targets = 0;
-		// Initialisation of the cibles array
-		cibles=new boolean[nbLignes][nbColonnes];
-		for (int i=0; i < nbLignes; i++){
-			for (int j=0; j < nbColonnes; j++){
-				cibles[i][j]=false;
-			}
-		}
-		
-		for (int i=0; i < nbCibles; i++){
+		for (int i = 0; i < nbCibles; i++){
 			String line = br.readLine();
 			String[] parsedline= line.split(" ");
 			int y = Integer.parseInt(parsedline[0]);
 			int x = Integer.parseInt(parsedline[1]);
-			cibles[x][y]=true;
+			cibles[x][y] = true;
 		}
 		
-		// Initialisation of the  array "vents"
-		vents=new Vent[nbLignes][nbColonnes][nbAltitudes];
-		
-		for (int i=0; i < nbAltitudes; i++){
-			for (int j=0; j < nbLignes; j++){
+		for (int a = 0; a < nbAltitudes; ++a){
+			for (int y = 0; y < nbLignes; ++y){
 				String line = br.readLine();
-				String[] parsedline= line.split(" ");
-				for (int t = 0 ; t < parsedline.length ; t += 2) {
-					vents[j][t/2][i]=new Vent(Integer.parseInt(parsedline[t]),Integer.parseInt(parsedline[t+1]));
+				String[] parsedline = line.split(" ");
+				for (int x = 0 ; x < nbColonnes ; ++x) {
+					int venty = Integer.parseInt(parsedline[2*x]);
+					int ventx = Integer.parseInt(parsedline[2*x + 1]);
+					vents[x][y][a] = new Vent(ventx, venty);
 				}
 			}
-			
-			
-			
-			
 		}
+		
 		br.close();
 	}
 	
