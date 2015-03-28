@@ -10,8 +10,8 @@ public class Test {
 			
 			pb.print();
 
-			//BadSolver solver = new BadSolver(pb);
-			Solver solver = new Solver(pb);
+			BadSolver solver = new BadSolver(pb);
+			//Solver solver = new Solver(pb);
 			
 			Solution solution = solver.solve();
 			//solution.print();

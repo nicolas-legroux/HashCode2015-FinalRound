@@ -42,17 +42,15 @@ public class GraphBuilder {
 				for(int z = 0; z < pb.nbAltitudes; z++){
 					Node src = nodes.get(new Position3D(x,y,z));
 					
-					for (int newz = z-1 ; z <= z+1 ; z++) {
+					for (int newz = z-1 ; newz <= z+1 ; ++newz) {
 						if (newz <= 0 || newz >= pb.nbAltitudes) 
 							continue;
 						Position3D newpos = src.position.move(newz, pb.vents[x][y][newz], pb.nbLignes, pb.nbColonnes);
-						if (newpos != null) {
-							System.out.println("Add neighbor");
+						if (newpos != null)
 							src.addNeighbor(nodes.get(newpos));
-						}
 					}
 					/*
-					for(int newz = z-1; z <= z+1; z++) {
+					for(int newz = z-1; newz <= z+1; newz++) {
 						if(newz < 0 || newz >= pb.nbAltitudes) 
 							continue;
 						
