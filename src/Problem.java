@@ -13,11 +13,9 @@ public class Problem {
 	int rayon;
 	int nbBallons;
 	int nbTours;
-<<<<<<< HEAD
 	
-	int x_de
-=======
->>>>>>> 91152214638e869d2e997d9555a19c7385f4c002
+	Position2D depart;
+	
 	boolean[][] cibles; // (colonne, ligne)
 	Vent[][][] vents; // (colonne, ligne, altitude)
 	
@@ -45,23 +43,36 @@ public class Problem {
 		nbBallons=Integer.parseInt(globalConstants[2]);
 		nbTours=Integer.parseInt(globalConstants[3]);
 		
+		String thirdLine = br.readLine();
+		String[] pos = thirdLine.split(" ");
+		depart=new Position2D(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]));
 		
-		//TODO : process globalConstants
-		// constant = Integer.parseInt(globalConstants[i]);
-		
-		//TODO : redéfinir éventuellement les variables globales en fonction des données
 		
 		//TODO : read each line, change NUMBER_OF_LINES
-		int NUMBER_OF_LINES = 0;
+		//int NUMBER_OF_Targets = 0;
 		
-		for (int i=0; i < NUMBER_OF_LINES; i++){
+		for (int i=0; i < nbCibles; i++){
 			String line = br.readLine();
+			String[] parsedline= line.split(" ");
+			cibles[Integer.parseInt(parsedline[0])][Integer.parseInt(parsedline[1])]=true;
 			
 			//TODO : process the line
 			//String[] temp = line.split(" ");
 			//value = Integer.parseInt(temp[k]);
 		}
 		
+		for (int i=0; i < nbAltitudes; i++){
+			for (int j=0; j < nbLignes; j++){
+				
+			}
+			String line = br.readLine();
+			String[] parsedline= line.split(" ");
+			cibles[Integer.parseInt(parsedline[0])][Integer.parseInt(parsedline[1])]=true;
+			
+			//TODO : process the line
+			//String[] temp = line.split(" ");
+			//value = Integer.parseInt(temp[k]);
+		}
 		br.close();
 	}
 	
