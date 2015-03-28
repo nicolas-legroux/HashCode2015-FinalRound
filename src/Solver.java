@@ -1,7 +1,6 @@
 
 public class Solver {
 	
-	
 	Problem problem;
 	
 	public Solver(Problem problem) {
@@ -13,6 +12,9 @@ public class Solver {
 		
 		// TODO : solve problem
 		System.out.println("Not implemented");
+		
+		GraphBuilder builder = new GraphBuilder(problem);
+		Graph graph = builder.build();
 		
 		return solution;
 	}

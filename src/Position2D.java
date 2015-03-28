@@ -8,6 +8,20 @@ public class Position2D {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Position2D move(Vent vent, int nbLignes, int nbColonnes) {
+		int xx = x + vent.ventx;
+		int yy = y + vent.venty;
+		
+		while (xx < 0)
+			xx += nbColonnes;
+		xx %= nbColonnes;
+		
+		if (yy >= 0 && yy < nbLignes)
+			return new Position2D(xx, yy);
+		else
+			return null; // Out of map
+	}
 
     @Override
     public boolean equals(Object o) {

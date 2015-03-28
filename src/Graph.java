@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,7 +21,14 @@ public class Graph {
 		return map.get(position);
 	}
 	
+
 	public Set<Position3D> getPositions(){
 		return map.keySet();
+	}
+	
+	public void print() {
+		for(Node node : map.values()) {
+			System.out.println("Node at " );
+		}
 	}
 }

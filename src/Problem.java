@@ -86,7 +86,23 @@ public class Problem {
 			for (int x = 0 ; x < nbColonnes ; ++x) {
 				System.out.print(cibles[x][y] ? "*" : ".");
 			}
-			System.out.print("\n");
+			System.out.println();
+		}
+		System.out.println();
+		
+		for (int a = 0; a < nbAltitudes; ++a) {
+			for (int y = 0 ; y < nbLignes ; ++y) {
+				for (int x = 0 ; x < nbColonnes ; ++x) {
+					System.out.print(vents[x][y][a].symbol());
+				}
+				System.out.println();
+
+				for (int x = 0 ; x < nbColonnes ; ++x) {
+					System.out.print(cibles[x][y] ? "*" : ".");
+				}
+				System.out.println();
+			}
+			System.out.println();
 		}
 	}
 
