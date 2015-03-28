@@ -13,8 +13,11 @@ public class Problem {
 	int rayon;
 	int nbBallons;
 	int nbTours;
+<<<<<<< HEAD
 	
 	int x_de
+=======
+>>>>>>> 91152214638e869d2e997d9555a19c7385f4c002
 	boolean[][] cibles; // (colonne, ligne)
 	Vent[][][] vents; // (colonne, ligne, altitude)
 	
