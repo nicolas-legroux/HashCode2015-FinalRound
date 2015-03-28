@@ -1,6 +1,7 @@
 
 public class Solver {
 	
+	
 	Problem problem;
 	
 	public Solver(Problem problem) {
