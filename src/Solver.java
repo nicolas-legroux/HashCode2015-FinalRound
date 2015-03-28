@@ -15,6 +15,8 @@ public class Solver {
 		
 		GraphBuilder builder = new GraphBuilder(problem);
 		Graph graph = builder.build();
+		System.out.println("graph building done");
+		graph.print();
 		
 		return solution;
 	}

@@ -36,9 +36,11 @@ public class Position3D {
     @Override
     public int hashCode() {
         int result = 0;
-        result = 61 * result + pos.hashCode();
-        result = 61 * result + z;
+        result = z * 75 * 300 + pos.hashCode();
         return result;
     }
 
+    public String toString() {
+    	return "("+pos.x+","+pos.y+","+z+")";
+    }
 }

@@ -22,6 +22,7 @@ public class GraphBuilder {
 				for(int z = 0; z < pb.nbAltitudes; z++){
 					pos = new Position3D(x,y,z);			
 					nodes.put(pos, new Node(pos, computeScoreForPosition(x,y)));
+					
 				}
 			}
 		}
@@ -42,13 +43,13 @@ public class GraphBuilder {
 					nodehere = nodes.get(new Position3D(x,y,z));
 					
 					for(int newz = z-1; z <= z+1; z++) {
-						int newx = (x+pb.vents[x][y][newz].ventx)%pb.nbColonnes;
+						if(newz < 0 || newz >= pb.nbAltitudes) 
+							continue;
+						
+						int newx = (x+pb.vents[x][y][newz].ventx + pb.nbColonnes)%pb.nbColonnes;
 						int newy = y+pb.vents[x][y][newz].venty;
 						
 						if(newy < 0 || newy >= pb.nbLignes) 
-							continue;
-						
-						if(newz < 0 || newz >= pb.nbAltitudes) 
 							continue;
 						
 						nodethere = nodes.get(new Position3D(newx,newy,newz));
@@ -68,6 +69,11 @@ public class GraphBuilder {
 		int score = 0;
 		for(int p = x - pb.rayon; p <= x + pb.rayon; p++) {
 			for(int q = y - pb.rayon; q <= y + pb.rayon; q++) {
+				if(q < 0 || q >= pb.nbLignes)
+					continue;
+				
+				p = (p + pb.nbColonnes)%pb.nbColonnes;
+				
 				if((y - q)*(y - q) + columndist(x,p)*columndist(x,p) <= pb.rayon*pb.rayon 
 						&& pb.cibles[p][q]) {
 					score++;
