@@ -76,12 +76,12 @@ public class GraphBuilder {
 	
 	private int computeScoreForPosition(int x, int y) {
 		int score = 0;
-		for(int p = x - pb.rayon; p <= x + pb.rayon; p++) {
+		for(int brutep = x - pb.rayon; brutep <= x + pb.rayon; brutep++) {
 			for(int q = y - pb.rayon; q <= y + pb.rayon; q++) {
 				if(q < 0 || q >= pb.nbLignes)
 					continue;
 				
-				p = (p + pb.nbColonnes)%pb.nbColonnes;
+				int p = (brutep + pb.nbColonnes)%pb.nbColonnes;
 				
 				if((y - q)*(y - q) + columndist(x,p)*columndist(x,p) <= pb.rayon*pb.rayon 
 						&& pb.cibles[p][q]) {
