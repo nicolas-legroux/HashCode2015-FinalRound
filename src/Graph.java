@@ -30,4 +30,10 @@ public class Graph {
 		for(Node node : map.values()) 
 			node.print();
 	}
+	
+	public void resetVisited(){
+		for(Node n : map.values()){
+			n.resetVisited();
+		}
+	}
 }
