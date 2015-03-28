@@ -19,9 +19,8 @@ public class Position2D {
 
     @Override
     public int hashCode() {
-        int result = 0;
-        result = 61 * result + x;
-        result = 61 * result + y;
+        int result = x;
+        result = 75 * result + y;
         return result;
     }
 

@@ -13,6 +13,7 @@ public class Test {
 			Solver solver = new Solver(pb);
 			
 			Solution solution = solver.solve();
+			
 			solution.print();
 			solution.save("data/output.txt");
 			
