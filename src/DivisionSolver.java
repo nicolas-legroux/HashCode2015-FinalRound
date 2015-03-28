@@ -1,5 +1,7 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class DivisionSolver {
 
@@ -7,17 +9,17 @@ public class DivisionSolver {
 	Solution solution;
 	Graph graph;
 	
-	private final int NPARALLELBALON = 5;
-	private final int LOOKINGFORWARD = 5;
-	private final int SALVEEVERY = 10;
+	private final int NPARALLELBALON = 20;
+	private final int LOOKINGFORWARD = 2;
+	private final int SALVEEVERY = 50;
 	
-	int[][] ygoal;
+	Position2D[][] ygoal;
 	
 	DivisionSolver(Problem problem) {
 		this.problem = problem;
 		GraphBuilder gb = new GraphBuilder(problem);
 		graph = gb.build();
-		ygoal = new int[problem.nbColonnes][NPARALLELBALON];
+		ygoal = new Position2D[problem.nbColonnes][NPARALLELBALON];
 		computeGoals();
 		System.out.println("Goals built");
 	}
@@ -26,12 +28,12 @@ public class DivisionSolver {
 		for(int x = 0; x < problem.nbColonnes; x++) {
 			int ymin = Integer.MAX_VALUE;
 			int ymax = 0;
-			
+			int realx = 0;
 			
 			boolean found = false;
 			for(int lookingx = x + LOOKINGFORWARD; !found; lookingx++) {
 				for(int y=0; y < problem.nbLignes; y++) {
-					int realx = (lookingx + problem.nbColonnes)%problem.nbColonnes;
+					realx = (lookingx + problem.nbColonnes)%problem.nbColonnes;
 					Node n = graph.getNode(new Position3D(realx, y, 1));
 					if(n.getScore() > 0) {
 						found = true;
@@ -51,7 +53,7 @@ public class DivisionSolver {
 			int delta = (ymax - ymin) / NPARALLELBALON;
 			
 			for(int b = 0; b < NPARALLELBALON; b++)
-				ygoal[x][b] = ymin + b * delta;
+				ygoal[x][b] = new Position2D(realx, ymin + b * delta);
 			
 		}
 	}
@@ -59,26 +61,21 @@ public class DivisionSolver {
 	public Solution solve() {
 		Solution solution = new Solution(problem);
 
-		// TODO : solve problem
 		Configuration start = new Configuration(problem.nbBallons);
 		
-		int nsalve = (int) Math.ceil(problem.nbBallons / NPARALLELBALON);
-		
-		for (int i = 0 ; i < problem.nbBallons ; ++i) {
-				start.setPosition(i, new Position3D(problem.depart, 0));
-		}
 		solution.initiale = start;
 		
 		solution.configurations = new Configuration[problem.nbTours];
+	
 		
-		Configuration last = solution.initiale;
-		
+		Map<Integer, List<Position3D>> posbalons = new HashMap<Integer, List<Position3D>>();
 		
 		for (int i = 0 ; i < problem.nbBallons ; ++i) {
 			int tour = 0;
 			List<Position3D> listpos = new LinkedList<Position3D>();
 			int isalve = (int) Math.floor(i / NPARALLELBALON);
 			int iinsalve = i%NPARALLELBALON;
+			Position3D actual = new Position3D(problem.depart,0);
 			
 			while(tour < problem.nbTours) {
 				
@@ -87,50 +84,41 @@ public class DivisionSolver {
 					tour++;
 				}
 				
+				List<Position3D> betternextsteps = null;
+				int leaststeps = Integer.MAX_VALUE;
 				
+				for(int z = 1; z <= problem.nbAltitudes; z++) {
+					List<Position3D> nextsteps = Dijkstra.run(graph.getNode(actual), 
+							graph.getNode(new Position3D(ygoal[actual.pos.x][iinsalve], z)));
+					int cost = nextsteps.size();
+					if(cost < leaststeps) {
+						leaststeps = cost;
+						betternextsteps = nextsteps;
+					}
+				}
+				
+				betternextsteps.remove(0);
+				
+				for(Position3D pos : betternextsteps) {
+					listpos.add(pos);
+					actual = pos;
+					tour++;
+				}
 			}
+			
+			posbalons.put(i, listpos);
 		}
 			
 		for (int tour = 0 ; tour < problem.nbTours ; ++tour) {
 			Configuration config = new Configuration(problem.nbBallons);
 			
-			for (int i = 0 ; i < problem.nbBallons ; ++i) {
-				int isalve = (int) Math.floor(i / NPARALLELBALON);
-				
-				if(isalve * SALVEEVERY < tour) { //les ballons suivant ne partent pas encore partis
-					config.setPosition(i, last.posBallons[i]);
-					continue; 
-				}
-				
-				Node node = graph.getNode(last.posBallons[i]);
-				
-				List<Node> x = node.getNeighbors();
-				if (x.size() > 0) {
-					int next = generator.nextInt(x.size());
-					config.setPosition(i, x.get(next).position);
-				} else
-					config.setPosition(i, last.posBallons[i]);
-			}
-			
+			for (int i = 0 ; i < problem.nbBallons ; ++i) 
+				config.setPosition(i, posbalons.get(i).get(tour));	
+					
 			solution.configurations[tour] = config;
-			last = config;
 		}
 		
 		return solution;
 	}
-	//Fonction qui pour un ballon décide où il va aller au prochain tour
-	Node nextStep(Node currentNode){
-		
-		Node nextNode = null;
-		List<Node> neighbors = currentNode.getNeighbors();
-		//TODO update score
-		
-		return nextNode;		
-	}
-	
-	void simulateRound(){
-
-	}
-	
 	
 }
