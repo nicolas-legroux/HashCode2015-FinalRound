@@ -37,6 +37,12 @@ public class Node {
 	
 	public void print() {
 		System.out.println("Node at " + position + " has a score of " + getScore() + " and has " + getNeighbors().size() +" neighbors");
+		/*
+		System.out.println("Neighbors : ");
+		for(Node n : neighbors){
+			System.out.print("\t " + n.position + "\n");
+		}
+		*/
 	}
 	
 }
