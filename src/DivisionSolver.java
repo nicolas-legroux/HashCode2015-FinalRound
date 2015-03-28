@@ -13,7 +13,7 @@ public class DivisionSolver {
 	
 	private final int NPARALLELBALON = 20;
 	private final int LOOKINGFORWARD = 10;
-	private final int SALVEEVERY = 50;
+	private final int SALVEEVERY = 20;
 	
 	Position2D[][] ygoal;
 	
@@ -41,7 +41,7 @@ public class DivisionSolver {
 					Node n = graph.getNode(new Position3D(realx, y, 1));
 					if(n == null)
 						continue;
-					if(n.getScore() >= 30) {
+					if(n.getScore() >= 10) {
 						found = true;
 						if(y <= ymin)
 							ymin = y;
@@ -95,23 +95,43 @@ public class DivisionSolver {
 				
 				List<Position3D> betternextsteps = null;
 				int leaststeps = Integer.MAX_VALUE;
+				
+				
+				Position2D goal = ygoal[actual.pos.x][iinsalve];
 				boolean foundpath = false;
-				for(int z = 1; z < problem.nbAltitudes; z++) {
-					Path path = Dijkstra.run(graph.getNode(actual), 
-							graph.getNode(new Position3D(ygoal[actual.pos.x][iinsalve], z)));
-					
-					if(path == null)
-						continue;
-					
-					List<Position3D> nextsteps = path.getPath();
-					
-					foundpath = true;
-					int cost = nextsteps.size();
-					if(cost < leaststeps) {
-						leaststeps = cost;
-						betternextsteps = nextsteps;
+				
+				startsearchgoal : for(int brutep = goal.x - 1; brutep <= goal.x + 1; brutep++) {
+					for(int q = goal.y - 1; q <= goal.x + 1; q++) {
+						if(q < 0 || q >= problem.nbLignes)
+							continue;
+						
+						int p = (brutep + problem.nbColonnes)%problem.nbColonnes;
+						
+						
+						
+						for(int z = 1; z < problem.nbAltitudes; z++) {
+							Path path = Dijkstra.run(graph.getNode(actual), 
+									graph.getNode(new Position3D(p, q, z)));
+							
+							if(path == null)
+								continue;
+							
+							List<Position3D> nextsteps = path.getPath();
+							
+							foundpath = true;
+							int cost = nextsteps.size();
+							if(cost < leaststeps) {
+								leaststeps = cost;
+								betternextsteps = nextsteps;
+							}
+						}
+						
+						if(foundpath)
+							break startsearchgoal;
+						
 					}
 				}
+				
 				
 				if(betternextsteps != null)
 					betternextsteps.remove(0);
