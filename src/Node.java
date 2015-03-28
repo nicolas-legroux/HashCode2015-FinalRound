@@ -9,12 +9,15 @@ public class Node {
 	private int bruteScore;
 	public Position3D position;
 	
+	boolean visited;
+	
 	Node(Position3D position, int score) {
 		neighbors = new LinkedList<Node>();
 		predecessors = new LinkedList<Node>();
 		this.bruteScore = score;
 		this.score = score;
 		this.position = position;
+		this.visited = false;
 	}
 	
 	public void addNeighbor(Node node) {
@@ -54,6 +57,18 @@ public class Node {
 			System.out.print("\t " + n.position + "\n");
 		}
 		*/
+	}
+	
+	public void setVisited(){
+		visited = true;
+	}
+	
+	public boolean isVisited(){
+		return visited;
+	}
+	
+	public void resetVisited(){
+		visited = false;
 	}
 	
 }

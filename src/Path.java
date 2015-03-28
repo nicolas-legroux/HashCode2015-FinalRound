@@ -23,4 +23,14 @@ public class Path {
 		}
 		System.out.println("");		
 	}
+	
+	Path copy(){
+		List<Position3D> cp = new LinkedList<Position3D>();
+		for(Position3D pos : path){
+			cp.add(pos);
+		}	
+		Path p = new Path();
+		p.path = cp;
+		return p;
+	}
 }
