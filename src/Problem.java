@@ -10,6 +10,8 @@ public class Problem {
 	int nbAltitudes;
 	
 	int nbCibles;
+	boolean[][] cibles; // (colonne, ligne)
+	Vent[][][] vents; // (colonne, ligne, altitude)
 	
 	Problem(String filename) throws IOException{
 		
