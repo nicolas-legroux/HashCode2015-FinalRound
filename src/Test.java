@@ -8,8 +8,8 @@ public class Test {
 		try {
 			Problem pb = new Problem("data/final_round.in");
 
-			GraphBuilder gb = new GraphBuilder(pb);
-			Graph g = gb.build();			
+			//GraphBuilder gb = new GraphBuilder(pb);
+			//Graph g = gb.build();			
 			
 			/*
 			pb.printCibles();
@@ -26,10 +26,11 @@ public class Test {
 			//Solver solver = new Solver(pb);
 			//pb.print();
 
-			DijkstraSolver solver = new DijkstraSolver(pb);
+			//DijkstraSolver solver = new DijkstraSolver(pb);
 			//BadSolver solver = new BadSolver(pb);
 			//Solver solver = new Solver(pb);
-			//DivisionSolver solver = new DivisionSolver(pb);
+			DivisionSolver solver = new DivisionSolver(pb);
+
 			
 			Solution solution = solver.solve();
 			//solution.print();
