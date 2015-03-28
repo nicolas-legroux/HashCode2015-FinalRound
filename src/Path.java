@@ -1,9 +1,8 @@
 import java.util.LinkedList;
-import java.util.List;
 
 public class Path {
 	
-	List<Position3D> path;
+	LinkedList<Position3D> path;
 	
 	Path(){
 		path = new LinkedList<Position3D>();
@@ -11,6 +10,10 @@ public class Path {
 	
 	void add(Position3D pos){
 		path.add(pos);
+	}
+	
+	void addFirst(Position3D pos){
+		path.addFirst(pos);
 	}
 	
 	Position3D getLast(){
@@ -25,7 +28,7 @@ public class Path {
 	}
 	
 	Path copy(){
-		List<Position3D> cp = new LinkedList<Position3D>();
+		LinkedList<Position3D> cp = new LinkedList<Position3D>();
 		for(Position3D pos : path){
 			cp.add(pos);
 		}	

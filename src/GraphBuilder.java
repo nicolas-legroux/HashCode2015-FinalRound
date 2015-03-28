@@ -50,7 +50,7 @@ public class GraphBuilder {
 		
 		boolean modif = true;
 		while (modif) {
-			System.out.println("New step :");
+			//System.out.println("New step :");
 			modif = false;
 			
 			LinkedList<Position3D> toremove = new LinkedList<Position3D>();
@@ -58,8 +58,8 @@ public class GraphBuilder {
 			for (Entry<Position3D, Node> entry : graph.map.entrySet()) {
 				Node node = entry.getValue();
 				if (node.getNeighbors().isEmpty()) {
-					System.out.println("Erase node :");
-					node.print();
+					//System.out.println("Erase node :");
+					//node.print();
 					for (Node pred : node.getPredecessors()) {
 						pred.removeNeighbor(node);
 					}
