@@ -13,6 +13,10 @@ public class Solver {
 		// TODO : solve problem
 		System.out.println("Not implemented");
 		
+		GraphBuilder builder = GraphBuilder(problem);
+		builder.build();
+		Graph graph = new Graph(builder.nodes, problem.depart);
+		
 		return solution;
 	}
 
