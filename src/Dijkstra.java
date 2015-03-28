@@ -82,15 +82,17 @@ public class Dijkstra {
 			Node node = elem.node;
 			int myScore = elem.score;
 			
-			if (myScore < 10) {
-				node.print();
-				System.out.println("score = " + myScore);
-			}
+			/*
+			node.print();
+			System.out.println("score = " + myScore);
+			//*/
 			
-			if (dst.contains(node)) {
+			if (dst.contains(node.position)) {
 				first = node.position;
+				/*
 				node.print();
 				System.out.println("score = " + myScore);
+				//*/
 				break;
 			}
 			

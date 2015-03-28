@@ -20,6 +20,14 @@ public class Path {
 		return path.get(path.size()-1);
 	}
 	
+	Position3D pollFirst(){
+		return path.pollFirst();
+	}
+
+	public boolean isEmpty() {
+		return path.isEmpty();
+	}
+	
 	void print(){
 		for(Position3D pos : path){
 			System.out.print("(" + pos.pos.x + ", " + pos.pos.y + ", " + pos.z + ") " );
