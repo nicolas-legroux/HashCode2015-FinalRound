@@ -5,47 +5,31 @@ import java.io.IOException;
 
 public class Solution {
 
+	Problem problem;
 	// TODO définir variables décrivant la solution
 
-	Solution() {
-		// Initialiser variables
+	Solution(Problem problem) {
+		this.problem = problem;
+		// TODO : Initialiser variables
+	}
+	
+	public void print() {
+		//TODO : print other useful info about solution (number of elements, etc...)
+		System.out.println("Print solution : not implemented");
 	}
 
-	void save(String filename) {
+	void save(String filename) throws IOException {
 		File file = new File(filename);
+		if (!file.exists())
+			file.createNewFile();
 
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		FileWriter fw = null;
-		try {
-			fw = new FileWriter(file.getAbsoluteFile());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
 		
-		try {
-			bw.write("Write the solution");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// TODO : write solution
+		bw.write("Write the solution");
 		
-		try {
-			bw.close();
-			System.out.println("Done writing the solution");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		bw.close();
+		System.out.println("Done writing the solution");
 	}
 }
