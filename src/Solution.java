@@ -7,6 +7,7 @@ public class Solution {
 
 	Problem problem;
 	// TODO définir variables décrivant la solution
+	Configuration initiale;
 	Configuration[] configurations;
 
 	Solution(Problem problem) {
@@ -27,14 +28,20 @@ public class Solution {
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
 		
-		// TODO : write solution
+		Configuration last = initiale;
 		for (int tour = 0 ; tour < problem.nbTours ; ++tour) {
+			Configuration current = configurations[tour];
+			
 			for (int j = 0 ; j < problem.nbBallons ; ++j) {
 				if (j > 0)
 					bw.write(" ");
-				bw.write(String.valueOf(configurations[tour].posBallons[j]));
+				int z = current.posBallons[j].z;
+				int delta = z - last.posBallons[j].z;
+				bw.write(String.valueOf(delta));
 			}
 			bw.write("\n");
+			
+			last = current;
 		}
 		
 		bw.close();
