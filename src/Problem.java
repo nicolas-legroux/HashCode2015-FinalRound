@@ -10,6 +10,9 @@ public class Problem {
 	int nbAltitudes;
 	
 	int nbCibles;
+	int rayon;
+	int nbBallons;
+	int nbTours;
 	boolean[][] cibles; // (colonne, ligne)
 	Vent[][][] vents; // (colonne, ligne, altitude)
 	
