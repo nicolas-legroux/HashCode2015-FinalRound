@@ -8,6 +8,11 @@ public class Test {
 		try {
 			Problem pb = new Problem("data/final_round.in");
 			
+
+			pb.printCibles();
+			
+			//Solver solver = new Solver(pb);
+
 			pb.print();
 
 			//BadSolver solver = new BadSolver(pb);
