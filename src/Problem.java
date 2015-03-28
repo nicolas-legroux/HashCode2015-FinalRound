@@ -58,21 +58,14 @@ public class Problem {
 			String line = br.readLine();
 			String[] parsedline= line.split(" ");
 			cibles[Integer.parseInt(parsedline[0])][Integer.parseInt(parsedline[1])]=true;
-			
-			//TODO : process the line
-			//String[] temp = line.split(" ");
-			//value = Integer.parseInt(temp[k]);
 		}
 		
 		for (int i=0; i < nbAltitudes; i++){
 			for (int j=0; j < nbLignes; j++){
 				String line = br.readLine();
 				String[] parsedline= line.split(" ");
-				int k=parsedline.length/2;
-				int t=0;
-				while (t<k){
+				for (int t = 0 ; t < parsedline.length ; t += 2) {
 					vents[i][j][t]=new Vent(Integer.parseInt(parsedline[t]),Integer.parseInt(parsedline[t+1]));
-					t=t+2;
 				}
 			}
 			
