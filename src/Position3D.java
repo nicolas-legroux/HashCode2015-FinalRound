@@ -7,6 +7,10 @@ public class Position3D {
 		pos = new Position2D(x, y);
 		this.z = z;
 	}
+	
+	public boolean isSame(int x, int y) {
+		return pos.x == x && pos.y == y;
+	}
 
     @Override
     public boolean equals(Object o) {
