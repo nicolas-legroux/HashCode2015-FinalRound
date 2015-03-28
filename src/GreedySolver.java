@@ -1,10 +1,11 @@
+import java.util.List;
 
 public class GreedySolver {
 	
 	//Principe de l'algorithme :
 	/*
 	 * On se balade sur le graphe
-	 * On simule tour par tour les mouvements de chaque ballon (au plus 3 choix possibles / ballon)
+	 * On siListmule tour par tour les mouvements de chaque ballon (au plus 3 choix possibles / ballon)
 	 * A la fin de chaque tour : on réinitialise les scores de chaque sommet du graphe
 	 * Score = nombre de cellules cibles couvertes par un sommet du graphe
 	 * Première idée : on prend le premier ballon, on trouve son voisin qui apporte un score max, on y va
@@ -24,13 +25,17 @@ public class GreedySolver {
 	}
 	
 	//Fonction qui pour un ballon décide où il va aller au prochain tour
-	Position3D nextStep(Position3D currentPosition){
+	Node nextStep(Node currentNode){
 		
-		Position3D nextPosition = null;
+		Node nextNode = null;
+		List<Node> neighbors = currentNode.getNeighbors();
+		
+		
+		
 		
 		//TODO update score
 		
-		return nextPosition;		
+		return nextNode;		
 	}
 	
 	void simulateRound(){
