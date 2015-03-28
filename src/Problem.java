@@ -5,6 +5,11 @@ import java.io.IOException;
 public class Problem {
 	
 	//TODO ici : définir les variables globales du probleme
+	int nbLignes;
+	int nbColonnes;
+	int nbAltitudes;
+	
+	int nbCibles;
 	
 	Problem(String filename) throws IOException{
 		
