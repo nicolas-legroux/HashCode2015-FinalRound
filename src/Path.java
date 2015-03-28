@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
 
 public class Path {
 	
@@ -26,6 +27,10 @@ public class Path {
 
 	public boolean isEmpty() {
 		return path.isEmpty();
+	}
+	
+	public List<Position3D> getPath() {
+		return path;
 	}
 	
 	void print(){
