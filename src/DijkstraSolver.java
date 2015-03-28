@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,6 +12,19 @@ public class DijkstraSolver {
 	public DijkstraSolver(Problem problem) {
 		this.problem = problem;
 		generator = new Random(123456789);
+	}
+	
+	public void remove(HashSet<Position3D> cibles, Position3D where) {
+		LinkedList<Position3D> toremove = new LinkedList<Position3D>();
+		for (Position3D pos : cibles) {
+			int dx = pos.pos.x - where.pos.x;
+			int dy = pos.pos.y - where.pos.y;
+			if (dx * dx + dy * dy <= 25)
+				toremove.add(pos);
+		}
+		
+		for (Position3D pos : toremove)
+			cibles.remove(pos);
 	}
 	
 	public Solution solve() {
@@ -31,32 +45,32 @@ public class DijkstraSolver {
 		
 		Path[] targets = new Path[problem.nbBallons];
 		Dijkstra dijkstra = new Dijkstra();
-
-		HashSet<Position3D> cibles = (HashSet<Position3D>)problem.setCibles.clone();
-		/*
-		for (int i = 0 ; i < problem.nbBallons ; ++i) {
-			if (cibles.isEmpty())
-				cibles = (HashSet<Position3D>)problem.setCibles.clone();
-
-			Path path = dijkstra.findFirst(graph.startingpoint, cibles);
-			if (path != null)
-				path.print();
-			cibles.remove(path.getLast());
-		}
-		//*/
 		
 		for (int tour = 0 ; tour < problem.nbTours ; ++tour) {
 			Configuration config = new Configuration(problem.nbBallons);
+
+			HashSet<Position3D> cibles = (HashSet<Position3D>)problem.setCibles.clone();
+			for (int i = 0 ; i < problem.nbBallons ; ++i) {
+				if (targets[i] != null && !targets[i].isEmpty()) {
+					remove(cibles, targets[i].getLast());
+				}
+			}
 			
 			System.out.println("Tour = " + tour + " ; cibles = " + cibles.size());
 			
 			for (int i = 0 ; i < problem.nbBallons ; ++i) {
 				Position3D lastPos = last.posBallons[i];
+				
+				if (i > 2 * tour) {
+					config.setPosition(i, lastPos);
+					continue;
+				}
+			
 				Path myPath = targets[i];
 				
 				if (myPath != null && myPath.isEmpty()) {
-					cibles.add(lastPos);
 					/*
+					cibles.add(lastPos);
 					System.out.println("Add :");
 					graph.getNode(lastPos).print();
 					//*/
@@ -64,9 +78,13 @@ public class DijkstraSolver {
 				}
 				
 				if (myPath == null) {
+					if (cibles.isEmpty())
+						cibles = (HashSet<Position3D>)problem.setCibles.clone();
+					
 					Path path = dijkstra.findFirst(graph.getNode(lastPos), cibles);
-					cibles.remove(path.getLast());
+					remove(cibles, path.getLast());
 					/*
+					cibles.remove(path.getLast());
 					System.out.println("Remove :");
 					graph.getNode(path.getLast()).print();
 					//*/
