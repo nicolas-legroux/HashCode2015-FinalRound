@@ -1,4 +1,5 @@
 import java.util.Map;
+import java.util.Set;
 
 
 public class Graph {
@@ -18,6 +19,11 @@ public class Graph {
 
 	public Node getNode(Position3D position) {
 		return map.get(position);
+	}
+	
+
+	public Set<Position3D> getPositions(){
+		return map.keySet();
 	}
 	
 	public void print() {
