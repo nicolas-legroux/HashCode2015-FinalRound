@@ -89,7 +89,7 @@ public class DivisionSolver {
 				
 				for(int z = 1; z <= problem.nbAltitudes; z++) {
 					List<Position3D> nextsteps = Dijkstra.run(graph.getNode(actual), 
-							graph.getNode(new Position3D(ygoal[actual.pos.x][iinsalve], z)));
+							graph.getNode(new Position3D(ygoal[actual.pos.x][iinsalve], z))).getPath();
 					int cost = nextsteps.size();
 					if(cost < leaststeps) {
 						leaststeps = cost;

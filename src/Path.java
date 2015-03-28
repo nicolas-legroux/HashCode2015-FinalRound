@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
 
 public class Path {
 	
@@ -18,6 +19,10 @@ public class Path {
 	
 	Position3D getLast(){
 		return path.get(path.size()-1);
+	}
+	
+	public List<Position3D> getPath() {
+		return path;
 	}
 	
 	void print(){
