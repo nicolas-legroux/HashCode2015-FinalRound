@@ -31,9 +31,8 @@ public class GraphBuilder {
 		
 		
 		Node nodehere;
-		Node nodetherebehind;
-		Node nodetheresame;
-		Node nodethereabove;
+		Node nodethere;
+
 		
 		
 		//now adding the edges
@@ -42,24 +41,20 @@ public class GraphBuilder {
 				for(int z = 0; z < pb.nbAltitudes; z++){
 					nodehere = nodes.get(new Position3D(x,y,z));
 					
-					int newx = (x+pb.vents[x][y][z].ventx)%pb.nbColonnes;
-					int newy = y+pb.vents[x][y][z].venty;
-					
-					if(newy < 0 || newy >= pb.nbLignes) 
-						continue;
-					
-					if(z-1 >= 0) {
-						nodetherebehind = nodes.get(new Position3D(newx,newy,z-1));
-						nodehere.addNeighbor(nodetherebehind);
+					for(int newz = z-1; z <= z+1; z++) {
+						int newx = (x+pb.vents[x][y][newz].ventx)%pb.nbColonnes;
+						int newy = y+pb.vents[x][y][newz].venty;
+						
+						if(newy < 0 || newy >= pb.nbLignes) 
+							continue;
+						
+						if(newz < 0 || newz >= pb.nbAltitudes) 
+							continue;
+						
+						nodethere = nodes.get(new Position3D(newx,newy,newz));
+						nodehere.addNeighbor(nodethere);
 					}
 					
-					nodetheresame = nodes.get(new Position3D(newx,newy,z));
-					nodehere.addNeighbor(nodetheresame);
-					
-					if(z+1 < pb.nbAltitudes) {
-						nodethereabove = nodes.get(new Position3D(newx,newy,z+1));
-						nodehere.addNeighbor(nodethereabove);
-					}
 			
 				}
 			}
@@ -73,7 +68,7 @@ public class GraphBuilder {
 		int score = 0;
 		for(int p = x - pb.rayon; p <= x + pb.rayon; p++) {
 			for(int q = y - pb.rayon; q <= y + pb.rayon; q++) {
-				if((x - p)*(x - p) + columndist(y,q)*columndist(y,q) <= pb.rayon*pb.rayon 
+				if((y - q)*(y - q) + columndist(x,p)*columndist(x,p) <= pb.rayon*pb.rayon 
 						&& pb.cibles[p][q]) {
 					score++;
 				}
