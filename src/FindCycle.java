@@ -52,7 +52,7 @@ public class FindCycle {
 		System.out.println("Found " + cycles.size() + " cycles.");
 		System.out.println("Printing paths : ");
 		for(Path p : currentPaths){
-			p.print();
+			//p.print();
 		}
 	}
 

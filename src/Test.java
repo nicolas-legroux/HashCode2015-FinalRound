@@ -8,13 +8,7 @@ public class Test {
 		try {
 			Problem pb = new Problem("data/final_round.in");
 			GraphBuilder gb = new GraphBuilder(pb);
-			Graph g = gb.build();
-			
-			Position3D start = new Position3D(30, 30, 2);
-			
-			FindCycle findCycle = new FindCycle(start, g);
-			findCycle.findCycles(12);
-			
+			Graph g = gb.build();			
 			
 			/*
 			pb.printCibles();
