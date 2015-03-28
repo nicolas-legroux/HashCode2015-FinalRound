@@ -22,7 +22,7 @@ public class Graph {
 	
 	public void print() {
 		for(Node node : map.values()) {
-			System.out.println("Node at " )
+			System.out.println("Node at " );
 		}
 	}
 }
