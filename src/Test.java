@@ -6,7 +6,7 @@ public class Test {
 		System.out.println("Hello World");
 		
 		try {
-			Problem pb = new Problem("data/input");
+			Problem pb = new Problem("data/final_round.in");
 			
 			pb.print();
 			
