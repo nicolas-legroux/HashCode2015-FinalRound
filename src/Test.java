@@ -10,11 +10,11 @@ public class Test {
 			
 			pb.print();
 			
-			Solver solver = new Solver(pb);
+			//Solver solver = new Solver(pb);
+			BadSolver solver = new BadSolver(pb);
 			
 			Solution solution = solver.solve();
-			
-			solution.print();
+			//solution.print();
 			solution.save("data/output.txt");
 			
 		} catch (IOException e) {
