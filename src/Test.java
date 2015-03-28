@@ -8,7 +8,7 @@ public class Test {
 		try {
 			Problem pb = new Problem("data/final_round.in");
 			
-			pb.print();
+			pb.printCibles();
 			
 			//Solver solver = new Solver(pb);
 			BadSolver solver = new BadSolver(pb);

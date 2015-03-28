@@ -80,15 +80,16 @@ public class Problem {
 	
 	public void print() {
 		//TODO : make sure that the input data has been read correctly
-		System.out.println("Print problem : not implemented");
-		
+				
 		for (int y = 0 ; y < nbLignes ; ++y) {
 			for (int x = 0 ; x < nbColonnes ; ++x) {
-				System.out.print(cibles[x][y] ? "*" : ".");
+				System.out.print(cibles[x][y] ? "C" : ".");
 			}
 			System.out.println();
 		}
 		System.out.println();
+		
+		
 		
 		for (int a = 0; a < nbAltitudes; ++a) {
 			for (int y = 0 ; y < nbLignes ; ++y) {
@@ -104,6 +105,17 @@ public class Problem {
 			}
 			System.out.println();
 		}
+		
+		
+	}
+	
+	public void printCibles(){
+		for (int y = 0 ; y < nbLignes ; ++y) {
+			for (int x = 0 ; x < nbColonnes ; ++x) {
+				System.out.print(cibles[x][y] ? "C" : ".");
+			}
+			System.out.println();
+		}			
 	}
 
 }
