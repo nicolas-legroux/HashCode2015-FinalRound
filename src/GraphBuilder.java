@@ -42,7 +42,7 @@ public class GraphBuilder {
 				for(int z = 0; z < pb.nbAltitudes; z++){
 					nodehere = nodes.get(new Position3D(x,y,z));
 					
-					for(int newz = z-1; z <= z+1; z++) {
+					for(int newz = z-1; newz <= z+1; newz++) {
 						if(newz < 0 || newz >= pb.nbAltitudes) 
 							continue;
 						

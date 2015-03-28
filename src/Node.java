@@ -13,7 +13,6 @@ public class Node {
 		this.bruteScore = score;
 		this.score = score;
 		this.position = position;
-		print();
 	}
 	
 	public void addNeighbor(Node node) {

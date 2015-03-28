@@ -27,7 +27,7 @@ public class Graph {
 	}
 	
 	public void print() {
-		for(Node node : map.values()) {
-		}
+		for(Node node : map.values()) 
+			node.print();
 	}
 }
